@@ -1,0 +1,11 @@
+Model Information:
+* title:	Server Room
+* source:	https://sketchfab.com/3d-models/server-room-57738fb52f46403a83b7374daf85921e
+* author:	Ferrozo (https://sketchfab.com/wilsoncotripa)
+
+Model License:
+* license type:	CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)
+* requirements:	Author must be credited. Modified versions must have the same license. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Server Room" (https://sketchfab.com/3d-models/server-room-57738fb52f46403a83b7374daf85921e) by Ferrozo (https://sketchfab.com/wilsoncotripa) licensed under CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)

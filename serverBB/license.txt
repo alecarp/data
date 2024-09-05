@@ -1,0 +1,11 @@
+Model Information:
+* title:	Server Computer (simple)
+* source:	https://sketchfab.com/3d-models/server-computer-simple-7a08e7a343ab4ba7bea4ca5c2e7ebb52
+* author:	hkbenjamin1994 (https://sketchfab.com/hkbenjamin1994)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Server Computer (simple)" (https://sketchfab.com/3d-models/server-computer-simple-7a08e7a343ab4ba7bea4ca5c2e7ebb52) by hkbenjamin1994 (https://sketchfab.com/hkbenjamin1994) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
