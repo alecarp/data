@@ -1,0 +1,5 @@
+Proyecto Campus 
+(Repositorio de Ingeniería en Electrónica UNM)
+Fue desarrollado por:
+Luciano A. Rabassa
+German A. Casco
