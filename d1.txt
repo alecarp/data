@@ -1,4 +1,4 @@
-Proyecto Campus
-Fue desarrollado por:
+Proyecto Campus <br>
+Fue desarrollado por: <br>
 
-Luciano A. Rabassa y German A. Casco
+Luciano A. Rabassa <br> German A. Casco <br>
