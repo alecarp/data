@@ -1,0 +1,505 @@
+<html><head><title>Proyecto Campus</title>
+<style>
+body, html {
+    margin: 0;padding: 0;
+    height: 100%;font-family: 'Ubuntu', sans-serif;overflow: hidden;
+}
+#escritorio {
+    height: 100vh;position: relative;
+}
+#video-fondo {
+    position: fixed;right: 0;bottom: 0;
+    min-width: 100%;min-height: 100%;object-fit: cover;z-index: -1;
+}
+#barratarea {
+    position: fixed;bottom: 0;
+    left: 0;width: 100%;height: 40px;background-color: rgba(0,0,0,0.8);display: flex;
+    align-items: center;justify-content: space-between;padding: 0 10px;z-index: 1000;
+}
+.barratarea-izquierda {
+    display: flex;align-items: center;
+}
+.icono {
+    width: 30px;height: 30px;margin-right: 10px;cursor: pointer;
+}
+#menu {
+    position: absolute;bottom: 40px;left: 0;width: 250px;
+    background-color: rgba(0,0,0,0.9);color: white;display: none;padding: 10px;z-index: 1000;
+}
+.menu-item {
+    padding: 5px;cursor: pointer;
+}
+.menu-item:hover {
+    background-color: #4a4a4a;
+}
+#terminal {
+    position: absolute;top: 50px;left: 50px;width: 600px;height: 400px;
+    background-color: rgba(0,0,0,0.8);color: #00ff00;font-family: monospace;padding: 10px;
+    display: none;overflow-y: auto;z-index: 1000;position: relative;  
+}
+.terminal-close {
+    position: absolute;top: 5px;right: 5px;background: none;border: none;
+    color: #00ff00;font-size: 18px;cursor: pointer;
+    padding: 0;width: 24px;height: 24px;display: flex;align-items: center;justify-content: center;
+}
+
+.terminal-close:hover {
+    color: #ff0000;
+}
+#linea-entrada {
+    display: flex;align-items: center;
+}
+#prompt {
+    margin-right: 5px;
+}
+#entrada-comando {
+    background: none;border: none;color: #00ff00;
+    font-family: monospace;flex-grow: 1;outline: none;
+}
+#reloj {
+    color: white;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.icono-escritorio {
+    position: absolute;width: 64px;height: 64px;display: flex;flex-direction: column;align-items: center;
+    color: white;text-shadow: 1px 1px 2px black;cursor: pointer;z-index: 1;
+    user-select: none;touch-action: none;-webkit-touch-callout: none;-webkit-user-select: none;
+}
+.icono-escritorio img {
+    width: 48px;height: 48px;margin-bottom: 5px;
+}
+.icono-escritorio span {
+    font-size: 12px;text-align: center;
+}
+.icono-escritorio.dragging {
+    opacity: 0.7;pointer-events: none;
+}
+#marcaagua {
+    position: fixed;
+    top: 50%;left: 50%;transform: translate(-50%, -50%);font-size: 48px;
+    color: rgba(255, 255, 255, 0.2);pointer-events: none;z-index: 0;font-weight: bold;
+    text-transform: uppercase;white-space: nowrap;animation: float 3s ease-in-out infinite;text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+@keyframes float {
+    0% {
+        transform: translate(-50%, -50%) scale(1);opacity: 0.2;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);opacity: 0.3;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);opacity: 0.2;
+    }
+}
+#animacion-intro {
+    position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;
+    display: grid;grid-template-columns: repeat(8, 1fr);grid-template-rows: repeat(4, 1fr);background: black;
+}
+
+.mosaico {
+    background-image: url('https://www.ceupe.pe/images/easyblog_articles/286/919.jpg');
+    background-size: 800% 400%;transform-style: preserve-3d;transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+#ventana-preferencias {
+  position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 600px;
+  height: 400px;background-color: rgba(0, 0, 0, 0.9);color: white;padding: 20px;
+  border-radius: 5px;display: none;z-index: 2000;overflow-y: auto;
+}
+
+#ventana-preferencias .close-button {
+  position: absolute;top: 10px;right: 10px;
+  background: none;border: none;color: white;font-size: 20px;cursor: pointer;
+}
+
+#contenido-preferencias {
+  margin-top: 20px;white-space: pre-wrap;font-family: monospace;
+}
+</style>
+</head>
+<body>
+
+<div id="animacion-intro"></div>
+
+<div id="escritorio">
+    <video autoplay muted loop id="video-fondo">
+        <source src="https://assets.mixkit.co/videos/18740/18740-720.mp4" type="video/mp4">
+    </video>
+    <div id="marcaagua">Proyecto Campus UNM</div>
+    <div class="icono-escritorio" style="top: 20px; left: 20px;">
+        <img src="https://i.postimg.cc/3NPX1wQg/campus-p.png" alt="ProyectoUnm">
+        <span>Repositorio UNM</span>
+    </div>
+    <div class="icono-escritorio" style="top: 120px; left: 20px;">
+        <img src="https://i.postimg.cc/fy37Y9pz/geogebra.jpg" alt="Geoebra">
+        <span>Geogebra</span>
+    </div>
+    <div class="icono-escritorio" style="top: 220px; left: 20px;">
+        <img src="https://i.postimg.cc/JnYcyqTY/matrix.png" alt="Calculadora Matriz">
+        <span>Matrix Calc</span>
+    </div>
+    <div class="icono-escritorio" style="top: 120px; left: 180px;">
+        <img src="https://i.postimg.cc/tRfNpBnY/desmos.jpg" alt="Graficadora Desmos">
+        <span>Desmos</span>
+    </div>
+    <div class="icono-escritorio" style="top: 20px; left: 180px;">
+        <img src="https://i.postimg.cc/FHH7nLhN/phet.png" alt="Graficadora Desmos">
+        <span>Phet (F&#xed;sica)</span>
+    </div>
+    <div class="icono-escritorio" style="top: 20px; left: 100px;">
+        <img src="https://cdn-1.webcatalog.io/catalog/eda-playground/eda-playground-icon-filled-256.png?v=1669863995747" alt="PlayGround">
+        <span>Eda PlayGround VHDL</span>
+    </div>
+    <div class="icono-escritorio" style="top: 120px; left: 100px;">
+        <img src="https://csg-prd.tinkercad.com/things/dA1x99zyQvQ/t725.png?rev=1608853840724000000&amp;s=&amp;v=1" alt="TinkerCad">
+        <span>TinkerCad</span>
+    </div>
+  
+    <div id="barratarea">
+        <div class="barratarea-izquierda">
+            <img src="https://i.postimg.cc/wvGL7ZxB/logo-icono2.png" alt="UnmRepo logo" class="icono" id="start-menu">
+            <img src="https://icon-library.com/images/terminal-icon-png/terminal-icon-png-6.jpg" alt="Terminal icon" class="icono" id="terminal-icon" style="display: none;">
+        </div>
+        <div id="reloj"></div>
+    </div>
+    <div id="menu">
+        <div class="menu-item" id="repo">Campus (Repositorio)</div>
+        <div class="menu-item">Terminal</div>
+        <div class="menu-item">Info</div>
+    </div>
+    <div id="terminal">
+        <button class="terminal-close">&#xd7;</button>
+        <div>Bienvenido a Proyecto Campus Terminal</div>
+        <div>Versi&#xf3;n 1.0.1</div>
+        <div>&#xa0;</div>
+        <div id="output"></div>
+        <div id="linea-entrada">
+            <span id="prompt">usuario@proyectocampus:~&#x24;</span>
+            <input type="text" id="entrada-comando" autofocus>
+        </div>
+    </div>
+</div>
+
+<div id="ventana-preferencias">
+  <button class="close-button">&#xd7;</button>
+  <h2>Informaci&#xf3;n</h2>
+  <div id="contenido-preferencias"></div>
+</div>
+
+<script>let ultimaPosicionTactil = { x: 0, y: 0 };
+let estaDragging = false;
+let elementoDraggingActual = null;
+let desplazamientoX, desplazamientoY;
+let ultimoTiempoClick = 0;
+function crearAnimacionIntro() {
+  const contenedor = document.getElementById('animacion-intro');
+  const mosaicos = [];
+  const filas = 4;
+  const columnas = 8;
+  for (let i = 0; i < filas; i++) {
+    for (let j = 0; j < columnas; j++) {
+      const mosaico = document.createElement('div');
+      mosaico.className = 'mosaico';
+      mosaico.style.backgroundPosition = `${-j * 100}% ${-i * 100}%`;
+      contenedor.appendChild(mosaico);
+      mosaicos.push(mosaico);
+    }
+  }
+  const mosaicosAleatorios = [...mosaicos].sort(() => Math.random() - 0.5);
+  mosaicosAleatorios.forEach((mosaico, index) => {
+    setTimeout(() => {
+      mosaico.style.transform = 'rotateY(90deg)';
+      mosaico.style.opacity = '0';
+    }, index * 6000 / 32);
+  });
+  setTimeout(() => {
+    contenedor.style.display = 'none';
+  }, 6000);
+}
+window.addEventListener('load', crearAnimacionIntro);
+document.querySelectorAll('.icono-escritorio').forEach((icono, index) => {
+  icono.addEventListener('mousedown', function (e) {
+    const tiempoActual = new Date().getTime();
+    const diferenciaTiempo = tiempoActual - ultimoTiempoClick;
+    if (diferenciaTiempo < 300) {
+      switch (index) {
+        case 0:
+          window.open('https://sites.google.com/view/proyectocampusunm', '_blank');
+          break;
+        case 1:
+          window.open('https://www.geogebra.org/classic?lang=es', '_blank');
+          break;
+        case 2:
+          window.open('https://matrixcalc.org/es/', '_blank');
+          break;
+        case 3:
+          window.open('https://www.desmos.com/calculator?lang=es', '_blank');
+          break;
+        case 4:
+          window.open('https://phet.colorado.edu/en/simulations/browse', '_blank');
+          break;
+        case 5:
+          window.open('https://www.edaplayground.com/', '_blank');
+          break;
+        case 6:
+          window.open('https://www.tinkercad.com/', '_blank');
+          break;
+      }
+      return;
+    }
+    ultimoTiempoClick = tiempoActual;
+    estaDragging = true;
+    elementoDraggingActual = this;
+    elementoDraggingActual.classList.add('dragging');
+    const rect = elementoDraggingActual.getBoundingClientRect();
+    desplazamientoX = e.clientX - rect.left;
+    desplazamientoY = e.clientY - rect.top;
+    e.preventDefault();
+  });
+  icono.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    const tiempoActual = new Date().getTime();
+    const diferenciaTiempo = tiempoActual - ultimoTiempoClick;
+    
+    if (diferenciaTiempo < 300) {
+      switch (index) {
+        case 0:
+          window.open('https://sites.google.com/view/proyectocampusunm', '_blank');
+          break;
+        case 1:
+          window.open('https://www.geogebra.org/classic?lang=es', '_blank');
+          break;
+        case 2:
+          window.open('https://matrixcalc.org/es/', '_blank');
+          break;
+        case 3:
+          window.open('https://www.desmos.com/calculator?lang=es', '_blank');
+          break;
+        case 4:
+          window.open('https://phet.colorado.edu/en/simulations/browse', '_blank');
+          break;
+        case 5:
+          window.open('https://www.edaplayground.com/', '_blank');
+          break;
+        case 6:
+          window.open('https://www.tinkercad.com/', '_blank');
+          break;
+      }
+      return;
+    }
+    
+    ultimoTiempoClick = tiempoActual;
+    estaDragging = true;
+    elementoDraggingActual = this;
+    elementoDraggingActual.classList.add('dragging');
+    
+    const touch = e.touches[0];
+    const rect = elementoDraggingActual.getBoundingClientRect();
+    desplazamientoX = touch.clientX - rect.left;
+    desplazamientoY = touch.clientY - rect.top;
+    ultimaPosicionTactil.x = touch.clientX;
+    ultimaPosicionTactil.y = touch.clientY;
+  });
+});
+document.addEventListener('mousemove', function (e) {
+  if (estaDragging && elementoDraggingActual) {
+    const x = e.clientX - desplazamientoX;
+    const y = e.clientY - desplazamientoY;
+    const escritorio = document.getElementById('escritorio');
+    const rectEscritorio = escritorio.getBoundingClientRect();
+    const rectIcono = elementoDraggingActual.getBoundingClientRect();
+    const maxX = rectEscritorio.width - rectIcono.width;
+    const maxY = rectEscritorio.height - rectIcono.height - 40;
+    const limitadoX = Math.max(0, Math.min(x, maxX));
+    const limitadoY = Math.max(0, Math.min(y, maxY));
+    elementoDraggingActual.style.left = limitadoX + 'px';
+    elementoDraggingActual.style.top = limitadoY + 'px';
+  }
+});
+document.addEventListener('mouseup', function () {
+  if (elementoDraggingActual) {
+    elementoDraggingActual.classList.remove('dragging');
+  }
+  estaDragging = false;
+  elementoDraggingActual = null;
+});
+document.addEventListener('touchmove', function(e) {
+  if (estaDragging && elementoDraggingActual) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const x = touch.clientX - desplazamientoX;
+    const y = touch.clientY - desplazamientoY;
+    
+    const escritorio = document.getElementById('escritorio');
+    const rectEscritorio = escritorio.getBoundingClientRect();
+    const rectIcono = elementoDraggingActual.getBoundingClientRect();
+    
+    const maxX = rectEscritorio.width - rectIcono.width;
+    const maxY = rectEscritorio.height - rectIcono.height - 40;
+    
+    const limitadoX = Math.max(0, Math.min(x, maxX));
+    const limitadoY = Math.max(0, Math.min(y, maxY));
+    
+    elementoDraggingActual.style.left = limitadoX + 'px';
+    elementoDraggingActual.style.top = limitadoY + 'px';
+    
+    ultimaPosicionTactil.x = touch.clientX;
+    ultimaPosicionTactil.y = touch.clientY;
+  }
+});
+
+document.addEventListener('touchend', function() {
+  if (elementoDraggingActual) {
+    elementoDraggingActual.classList.remove('dragging');
+  }
+  estaDragging = false;
+  elementoDraggingActual = null;
+});
+
+document.addEventListener('touchcancel', function() {
+  if (elementoDraggingActual) {
+    elementoDraggingActual.classList.remove('dragging');
+  }
+  estaDragging = false;
+  elementoDraggingActual = null;
+});
+document.getElementById('start-menu').addEventListener('click', function () {
+  const menu = document.getElementById('menu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+});
+document.getElementById('start-menu').addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  const menu = document.getElementById('menu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+});
+document.getElementById('repo').addEventListener('click', function () {
+  window.open('https://sites.google.com/view/proyectocampusunm', '_blank');
+});
+document.getElementById('terminal-icon').addEventListener('click', function () {
+  const terminal = document.getElementById('terminal');
+  terminal.style.display = terminal.style.display === 'none' ? 'block' : 'none';
+  if (terminal.style.display === 'block') {
+    document.getElementById('entrada-comando').focus();
+  }
+  this.style.display = terminal.style.display === 'none' ? 'none' : 'block';
+});
+document.getElementById('terminal-icon').addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  const terminal = document.getElementById('terminal');
+  terminal.style.display = terminal.style.display === 'none' ? 'block' : 'none';
+  if (terminal.style.display === 'block') {
+    document.getElementById('entrada-comando').focus();
+  }
+  this.style.display = terminal.style.display === 'none' ? 'none' : 'block';
+});
+document.getElementById('entrada-comando').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') {
+    const comando = this.value;
+    const salida = document.getElementById('output');
+    salida.innerHTML += `<div>${document.getElementById('prompt').textContent} ${comando}</div>`;
+    let respuesta = '';
+    switch (comando.toLowerCase()) {
+      case 'ls':
+        respuesta = 'Documentos  Tutoriales Material';
+        break;
+      case 'pwd':
+        respuesta = '/inicio/usuario';
+        break;
+      case 'date':
+        respuesta = new Date().toString();
+        break;
+      case 'whoami':
+        respuesta = 'usuario';
+        break;
+      case 'uname -a':
+        respuesta = 'Proyecto Campus (Ing.) OS 1.0.1 x86_64';break;
+      default:respuesta = `${comando}: comando no encontrado`;
+    }
+    salida.innerHTML += `<div>${respuesta}</div>`;
+    this.value = '';
+    salida.scrollTop = salida.scrollHeight;
+  }
+});
+document.addEventListener('click', function (event) {
+  const menu = document.getElementById('menu');
+  const startMenu = document.getElementById('start-menu');
+  const ventanaPreferencias = document.getElementById('ventana-preferencias');
+  if (!menu.contains(event.target) && event.target !== startMenu) {
+    menu.style.display = 'none';
+  }
+  if (!ventanaPreferencias.contains(event.target) && !event.target.matches('.menu-item')) {
+    ventanaPreferencias.style.display = 'none';
+  }
+});
+function actualizarReloj() {
+  const ahora = new Date();
+  const horas = String(ahora.getHours()).padStart(2, '0');
+  const minutos = String(ahora.getMinutes()).padStart(2, '0');
+  const segundos = String(ahora.getSeconds()).padStart(2, '0');
+  document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
+}
+setInterval(actualizarReloj, 1000);
+actualizarReloj();
+async function cargarPreferencias() {
+  try {
+    const respuesta = await fetch('https://cdn.jsdelivr.net/gh/alecarp/data@main/d1.txt');
+    const texto = await respuesta.text();
+    document.getElementById('contenido-preferencias').textContent = texto;
+  } catch (error) {
+    console.error('Error loading preferences:', error);
+    document.getElementById('contenido-preferencias').textContent = 'Error de carga de contenido.';
+  }
+}
+document.querySelector('.menu-item:nth-child(3)').addEventListener('click', function () {
+  const ventanaPreferencias = document.getElementById('ventana-preferencias');
+  ventanaPreferencias.style.display = 'block';
+  cargarPreferencias();
+});
+document.querySelector('.menu-item:nth-child(3)').addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  const ventanaPreferencias = document.getElementById('ventana-preferencias');
+  ventanaPreferencias.style.display = 'block';
+  cargarPreferencias();
+});
+document.querySelector('#ventana-preferencias .close-button').addEventListener('click', function () {
+  document.getElementById('ventana-preferencias').style.display = 'none';
+});
+document.querySelector('#ventana-preferencias .close-button').addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  document.getElementById('ventana-preferencias').style.display = 'none';
+});
+document.querySelector('.menu-item:nth-child(2)').addEventListener('click', function () {
+  const terminal = document.getElementById('terminal');
+  const terminalIcon = document.getElementById('terminal-icon');
+  terminal.style.display = terminal.style.display === 'none' ? 'block' : 'none';
+  if (terminal.style.display === 'block') {
+    document.getElementById('entrada-comando').focus();
+  }
+  terminalIcon.style.display = terminal.style.display === 'none' ? 'none' : 'block';
+});
+document.querySelector('.menu-item:nth-child(2)').addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  const terminal = document.getElementById('terminal');
+  const terminalIcon = document.getElementById('terminal-icon');
+  terminal.style.display = terminal.style.display === 'none' ? 'block' : 'none';
+  if (terminal.style.display === 'block') {
+    document.getElementById('entrada-comando').focus();
+  }
+  terminalIcon.style.display = terminal.style.display === 'none' ? 'none' : 'block';
+});
+document.querySelector('.terminal-close').addEventListener('click', function () {
+  const terminal = document.getElementById('terminal');
+  const terminalIcon = document.getElementById('terminal-icon');
+  terminal.style.display = 'none';
+  terminalIcon.style.display = 'none';
+});
+document.querySelector('.terminal-close').addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  const terminal = document.getElementById('terminal');
+  const terminalIcon = document.getElementById('terminal-icon');
+  terminal.style.display = 'none';
+  terminalIcon.style.display = 'none';
+});</script>
+</body></html>
